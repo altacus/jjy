@@ -159,272 +159,398 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 			p[i] = true;
 		}
 
-		int i = cal.get(Calendar.MINUTE);
-		int j = cal.get(Calendar.HOUR_OF_DAY);
-		int k = cal.get(Calendar.DAY_OF_YEAR);
-		int m = cal.get(Calendar.YEAR);
-		int n = cal.get(Calendar.DAY_OF_WEEK) - 1;
-		int i1 = 0;
-		int i2 = 0;
+		int mm = cal.get(Calendar.MINUTE);
+		int hh = cal.get(Calendar.HOUR_OF_DAY);
+		int dayOfYear = cal.get(Calendar.DAY_OF_YEAR);
+		int yy = cal.get(Calendar.YEAR);
+		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK) - 1;
 
-		int i3 = i;
+		int hoursParity = 0;
+		int minutesParity = 0;
+		int mm0 = mm;
 
+		// 0
 		p[0] = true;
-		if (i >= 40) {
+
+		// 1
+		if (mm >= 40) {
 			p[1] = true;
-			i -= 40;
-			i2++;
+			mm -= 40;
+			minutesParity++;
 		} else {
 			p[1] = false;
 		}
-		if (i >= 20) {
+
+		// 2
+		if (mm >= 20) {
 			p[2] = true;
-			i -= 20;
-			i2++;
+			mm -= 20;
+			minutesParity++;
 		} else {
 			p[2] = false;
 		}
-		if (i >= 10) {
+
+		// 3
+		if (mm >= 10) {
 			p[3] = true;
-			i -= 10;
-			i2++;
+			mm -= 10;
+			minutesParity++;
 		} else {
 			p[3] = false;
 		}
+
+		// 4
 		p[4] = false;
 
-		if (i >= 8) {
+		// 5
+		if (mm >= 8) {
 			p[5] = true;
-			i -= 8;
-			i2++;
+			mm -= 8;
+			minutesParity++;
 		} else {
 			p[5] = false;
 		}
-		if (i >= 4) {
+
+		// 6
+		if (mm >= 4) {
 			p[6] = true;
-			i -= 4;
-			i2++;
+			mm -= 4;
+			minutesParity++;
 		} else {
 			p[6] = false;
 		}
-		if (i >= 2) {
+
+		// 7
+		if (mm >= 2) {
 			p[7] = true;
-			i -= 2;
-			i2++;
+			mm -= 2;
+			minutesParity++;
 		} else {
 			p[7] = false;
 		}
-		if (i >= 1) {
+
+		// 8
+		if (mm >= 1) {
 			p[8] = true;
-			i2++;
+			minutesParity++;
 		} else {
 			p[8] = false;
 		}
+
+		// 9
 		p[9] = true;
+
+		// 10
 		p[10] = false;
+
+		// 11
 		p[11] = false;
 
-		if (j >= 20) {
+		// 12
+		if (hh >= 20) {
 			p[12] = true;
-			j -= 20;
-			i1++;
+			hh -= 20;
+			hoursParity++;
 		} else {
 			p[12] = false;
 		}
-		if (j >= 10) {
+
+		// 13
+		if (hh >= 10) {
 			p[13] = true;
-			j -= 10;
-			i1++;
+			hh -= 10;
+			hoursParity++;
 		} else {
 			p[13] = false;
 		}
+
+		// 14
 		p[14] = false;
-		if (j >= 8) {
+
+		// 15
+		if (hh >= 8) {
 			p[15] = true;
-			j -= 8;
-			i1++;
+			hh -= 8;
+			hoursParity++;
 		} else {
 			p[15] = false;
 		}
-		if (j >= 4) {
+
+		// 16
+		if (hh >= 4) {
 			p[16] = true;
-			j -= 4;
-			i1++;
+			hh -= 4;
+			hoursParity++;
 		} else {
 			p[16] = false;
 		}
-		if (j >= 2) {
+
+		// 17
+		if (hh >= 2) {
 			p[17] = true;
-			j -= 2;
-			i1++;
+			hh -= 2;
+			hoursParity++;
 		} else {
 			p[17] = false;
 		}
-		if (j >= 1) {
+
+		// 18
+		if (hh >= 1) {
 			p[18] = true;
-			i1++;
+			hoursParity++;
 		} else {
 			p[18] = false;
 		}
+
+		// 19
 		p[19] = true;
+
+		// 20
 		p[20] = false;
+
+		// 21
 		p[21] = false;
 
-		if (k >= 200) {
+		// 22
+		if (dayOfYear >= 200) {
 			p[22] = true;
-			k -= 200;
+			dayOfYear -= 200;
 		} else {
 			p[22] = false;
 		}
-		if (k >= 100) {
+
+		// 23
+		if (dayOfYear >= 100) {
 			p[23] = true;
-			k -= 100;
+			dayOfYear -= 100;
 		} else {
 			p[23] = false;
 		}
+
+		// 24
 		p[24] = false;
-		if (k >= 80) {
+
+		// 25
+		if (dayOfYear >= 80) {
 			p[25] = true;
-			k -= 80;
+			dayOfYear -= 80;
 		} else {
 			p[25] = false;
 		}
-		if (k >= 40) {
+
+		// 26
+		if (dayOfYear >= 40) {
 			p[26] = true;
-			k -= 40;
+			dayOfYear -= 40;
 		} else {
 			p[26] = false;
 		}
-		if (k >= 20) {
+
+		// 27
+		if (dayOfYear >= 20) {
 			p[27] = true;
-			k -= 20;
+			dayOfYear -= 20;
 		} else {
 			p[27] = false;
 		}
-		if (k >= 10) {
+
+		// 28
+		if (dayOfYear >= 10) {
 			p[28] = true;
-			k -= 10;
+			dayOfYear -= 10;
 		} else {
 			p[28] = false;
 		}
+
+		// 29
 		p[29] = true;
-		if (k >= 8) {
+
+		// 30
+		if (dayOfYear >= 8) {
 			p[30] = true;
-			k -= 8;
+			dayOfYear -= 8;
 		} else {
 			p[30] = false;
 		}
-		if (k >= 4) {
+
+		// 31
+		if (dayOfYear >= 4) {
 			p[31] = true;
-			k -= 4;
+			dayOfYear -= 4;
 		} else {
 			p[31] = false;
 		}
-		if (k >= 2) {
+
+		// 32
+		if (dayOfYear >= 2) {
 			p[32] = true;
-			k -= 2;
+			dayOfYear -= 2;
 		} else {
 			p[32] = false;
 		}
-		if (k >= 1)
-			p[33] = true;
-		else
-			p[33] = false;
-		p[34] = false;
-		p[35] = false;
-		if (i1 % 2 == 1)
-			p[36] = true;
-		else
-			p[36] = false;
-		if (i2 % 2 == 1)
-			p[37] = true;
-		else
-			p[37] = false;
 
-		if ((i3 == 15) || (i3 == 45)) {
-			for (int i4 = 38; i4 < 60; i4++)
-				p[i4] = false;
+		// 33
+		if (dayOfYear >= 1) {
+			p[33] = true;
+		} else {
+			p[33] = false;
+		}
+
+		// 34
+		p[34] = false;
+
+		// 35
+		p[35] = false;
+
+		// 36
+		if (hoursParity % 2 == 1) {
+			p[36] = true;
+		} else {
+			p[36] = false;
+		}
+
+		// 37
+		if (minutesParity % 2 == 1) {
+			p[37] = true;
+		} else {
+			p[37] = false;
+		}
+
+		// 38 - 59
+		if ((mm0 == 15) || (mm0 == 45)) {
+			/*
+			 * Twice per hour (minutes 15 and 45), the last 20
+			 * seconds of the time code are different. In lieu of
+			 * the year bits, the station's call sign is broadcast
+			 * at 100% modulation during seconds 40 through 48.
+			 * Further, bits 50 through 55 are replaced by 6 status
+			 * bits ST1 through ST6 which, if non-zero, indicate a
+			 * scheduled service interruption:
+			 */
+			for (int i = 38; i < 60; i++) {
+				p[i] = false;
+			}
 			return;
 		}
 
+		// 38
 		p[38] = false;
+
+		// 39
 		p[39] = true;
+
+		// 40
 		p[40] = false;
 
-		m -= 2000;
-
-		if (m >= 80) {
+		// 41
+		yy -= 2000;
+		if (yy >= 80) {
 			p[41] = true;
-			m -= 80;
+			yy -= 80;
 		} else {
 			p[41] = false;
 		}
-		if (m >= 40) {
+
+		// 42
+		if (yy >= 40) {
 			p[42] = true;
-			m -= 40;
+			yy -= 40;
 		} else {
 			p[42] = false;
 		}
-		if (m >= 20) {
+
+		// 43
+		if (yy >= 20) {
 			p[43] = true;
-			m -= 20;
+			yy -= 20;
 		} else {
 			p[43] = false;
 		}
-		if (m >= 10) {
+
+		// 44
+		if (yy >= 10) {
 			p[44] = true;
-			m -= 10;
+			yy -= 10;
 		} else {
 			p[44] = false;
 		}
-		if (m >= 8) {
+
+		// 45
+		if (yy >= 8) {
 			p[45] = true;
-			m -= 8;
+			yy -= 8;
 		} else {
 			p[45] = false;
 		}
-		if (m >= 4) {
+
+		// 46
+		if (yy >= 4) {
 			p[46] = true;
-			m -= 4;
+			yy -= 4;
 		} else {
 			p[46] = false;
 		}
-		if (m >= 2) {
+
+		// 47
+		if (yy >= 2) {
 			p[47] = true;
-			m -= 2;
+			yy -= 2;
 		} else {
 			p[47] = false;
 		}
-		if (m >= 1)
+
+		// 48
+		if (yy >= 1) {
 			p[48] = true;
-		else
+		} else {
 			p[48] = false;
+		}
+
+		// 49
 		p[49] = true;
 
-		if (n >= 4) {
+		// 50
+		if (dayOfWeek >= 4) {
 			p[50] = true;
-			n -= 4;
+			dayOfWeek -= 4;
 		} else {
 			p[50] = false;
 		}
-		if (n >= 2) {
+
+		// 51
+		if (dayOfWeek >= 2) {
 			p[51] = true;
-			n -= 2;
+			dayOfWeek -= 2;
 		} else {
 			p[51] = false;
 		}
-		if (n >= 1)
-			p[52] = true;
-		else
-			p[52] = false;
 
+		// 52
+		if (dayOfWeek >= 1) {
+			p[52] = true;
+		} else {
+			p[52] = false;
+		}
+
+		// 53
 		p[53] = false;
+
+		// 54
 		p[54] = false;
+
+		// 55
 		p[55] = false;
+
+		// 56
 		p[56] = false;
+
+		// 57
 		p[57] = false;
+
+		// 58
 		p[58] = false;
 
+		// 59
 		p[59] = true;
 	}
 
