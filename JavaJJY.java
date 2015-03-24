@@ -58,13 +58,17 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 		gr.setFont(new Font("SansSerif", 1, 14));
 
 		startBT = new Button();
+
 		String str = getParameter("autostart");
-		if (str == null)
+		if (str == null) {
 			str = "no";
-		if (str.equals("yes"))
+		}
+
+		if (str.equals("yes")) {
 			isPause = false;
-		else
+		} else {
 			isPause = true;
+		}
 
 		add(startBT);
 		setLayout(null);
@@ -581,9 +585,11 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 		int hh = cal.get(Calendar.HOUR_OF_DAY);
 		int mm = cal.get(Calendar.MINUTE);
 		int ss = cal.get(Calendar.SECOND);
+
 		gr.clearRect(0, 0, thisSize.width, thisSize.height);
 		gr.drawString(String.format("Time is %02d:%02d:%02d", hh, mm, ss), 20, 20);
 		gr.drawString("Press button to start.", 20, 40);
+
 		repaint();
 	}
 
