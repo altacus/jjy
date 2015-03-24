@@ -429,33 +429,34 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 	}
 
 	private void displayTime(Calendar cal, boolean paramBoolean) {
-		int i = cal.get(Calendar.HOUR_OF_DAY);
-		int j = cal.get(Calendar.MINUTE);
-		int k = cal.get(Calendar.SECOND);
+		int hh = cal.get(Calendar.HOUR_OF_DAY);
+		int mm = cal.get(Calendar.MINUTE);
+		int ss = cal.get(Calendar.SECOND);
+
 		gr.clearRect(0, 0, thisSize.width, thisSize.height);
-		gr.drawString("Time is " + i + ":" + j + ":" + k, 20, 20);
+		gr.drawString(String.format("Time is %02d:%02d:%02d", hh, mm, ss), 20, 20);
 
 		if (paramBoolean)
-			gr.drawString("signal starts in " + (60 - k) + "sec.", 20, 40);
-		else if (k == 0)
-			gr.drawString("bit and value is " + k + " : M", 20, 40);
-		else if (k % 10 == 9)
-			gr.drawString("bit and value is " + k + " : P", 20, 40);
-		else if (p[k] == true)
-			gr.drawString("bit and value is " + k + " : " + 1, 20, 40);
+			gr.drawString("signal starts in " + (60 - ss) + "sec.", 20, 40);
+		else if (ss == 0)
+			gr.drawString("bit and value is " + ss + " : M", 20, 40);
+		else if (ss % 10 == 9)
+			gr.drawString("bit and value is " + ss + " : P", 20, 40);
+		else if (p[ss] == true)
+			gr.drawString("bit and value is " + ss + " : " + 1, 20, 40);
 		else {
-			gr.drawString("bit and value is " + k + " : " + 0, 20, 40);
+			gr.drawString("bit and value is " + ss + " : " + 0, 20, 40);
 		}
 
 		repaint();
 	}
 
 	private void displayPause(Calendar cal) {
-		int i = cal.get(Calendar.HOUR_OF_DAY);
-		int j = cal.get(Calendar.MINUTE);
-		int k = cal.get(Calendar.SECOND);
+		int hh = cal.get(Calendar.HOUR_OF_DAY);
+		int mm = cal.get(Calendar.MINUTE);
+		int ss = cal.get(Calendar.SECOND);
 		gr.clearRect(0, 0, thisSize.width, thisSize.height);
-		gr.drawString("Time is " + i + ":" + j + ":" + k, 20, 20);
+		gr.drawString(String.format("Time is %02d:%02d:%02d", hh, mm, ss), 20, 20);
 		gr.drawString("Press button to start.", 20, 40);
 		repaint();
 	}
