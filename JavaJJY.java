@@ -33,7 +33,7 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 	Button startBT;
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == startBT)
+		if (e.getSource() == startBT) {
 			if (isPause) {
 				startBT.setLabel("Stop");
 				sourcedataline.start();
@@ -44,6 +44,7 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 				sourcedataline.flush();
 				isPause = true;
 			}
+		}
 	}
 
 	public void destroy() {
@@ -100,10 +101,11 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 
 		for (int i = 0; i < wave08.length; i++) {
 			if (i < length08) {
-				if (i % 2 == 0)
+				if (i % 2 == 0) {
 					wave08[i] = 120;
-				else
+				} else {
 					wave08[i] = -120;
+				}
 			} else {
 				wave08[i] = 0;
 			}
@@ -111,10 +113,11 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 
 		for (int i = 0; i < wave05.length; i++) {
 			if (i < length05) {
-				if (i % 2 == 0)
+				if (i % 2 == 0) {
 					wave05[i] = 120;
-				else
+				} else {
 					wave05[i] = -120;
+				}
 			} else {
 				wave05[i] = 0;
 			}
@@ -122,10 +125,11 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 
 		for (int i = 0; i < wave02.length; i++) {
 			if (i < length02) {
-				if (i % 2 == 0)
+				if (i % 2 == 0) {
 					wave02[i] = 120;
-				else
+				} else {
 					wave02[i] = -120;
+				}
 			} else {
 				wave02[i] = 0;
 			}
@@ -558,7 +562,7 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 		p[59] = true;
 	}
 
-	private void displayTime(Calendar cal, boolean paramBoolean) {
+	private void displayTime(Calendar cal, boolean waiting) {
 		int hh = cal.get(Calendar.HOUR_OF_DAY);
 		int mm = cal.get(Calendar.MINUTE);
 		int ss = cal.get(Calendar.SECOND);
@@ -566,15 +570,15 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 		gr.clearRect(0, 0, thisSize.width, thisSize.height);
 		gr.drawString(String.format("Time is %02d:%02d:%02d", hh, mm, ss), 20, 20);
 
-		if (paramBoolean)
+		if (waiting) {
 			gr.drawString("signal starts in " + (60 - ss) + "sec.", 20, 40);
-		else if (ss == 0)
+		} else if (ss == 0) {
 			gr.drawString("bit and value is " + ss + " : M", 20, 40);
-		else if (ss % 10 == 9)
+		} else if (ss % 10 == 9) {
 			gr.drawString("bit and value is " + ss + " : P", 20, 40);
-		else if (p[ss] == true)
+		} else if (p[ss] == true) {
 			gr.drawString("bit and value is " + ss + " : " + 1, 20, 40);
-		else {
+		} else {
 			gr.drawString("bit and value is " + ss + " : " + 0, 20, 40);
 		}
 
@@ -595,8 +599,9 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 
 	private void sleepMS(int ms) {
 		try {
-			if (ms < 0)
+			if (ms < 0) {
 				return;
+			}
 			Thread.sleep(ms);
 		} catch (Exception e) {
 			// empty
@@ -606,7 +611,7 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 	public void run() {
 		Calendar cal = Calendar.getInstance();
 		int s0 = cal.get(Calendar.SECOND);
-		boolean bool = true;
+		boolean waiting = true;
 
 		while (isRunning) {
 			cal = Calendar.getInstance();
@@ -617,16 +622,16 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 
 				if (isPause) {
 					displayPause(cal);
-					bool = true;
+					waiting = true;
 				} else {
-					if (bool) {
+					if (waiting) {
 						makeTimecode(cal);
-						bool = false;
+						waiting = false;
 					} else if (s1 == 0) {
 						makeTimecode(cal);
 					}
 
-					displayTime(cal, bool);
+					displayTime(cal, waiting);
 
 					if ((s1 == 0) || (s1 % 10 == 9)) {
 						sourcedataline.write(wave02, 0, wave02.length);
