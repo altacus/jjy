@@ -599,15 +599,15 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 
 	public void run() {
 		Calendar cal = Calendar.getInstance();
-		int j = cal.get(Calendar.SECOND);
+		int s0 = cal.get(Calendar.SECOND);
 		boolean bool = true;
 
 		while (isRunning) {
 			cal = Calendar.getInstance();
 
-			int i = cal.get(Calendar.SECOND);
-			if (i != j) {
-				j = i;
+			int s1 = cal.get(Calendar.SECOND);
+			if (s1 != s0) {
+				s0 = s1;
 
 				if (isPause) {
 					displayPause(cal);
@@ -616,15 +616,15 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 					if (bool) {
 						makeTimecode(cal);
 						bool = false;
-					} else if (i == 0) {
+					} else if (s1 == 0) {
 						makeTimecode(cal);
 					}
 
 					displayTime(cal, bool);
 
-					if ((i == 0) || (i % 10 == 9)) {
+					if ((s1 == 0) || (s1 % 10 == 9)) {
 						sourcedataline.write(wave02, 0, wave02.length);
-					} else if (p[i] == true) {
+					} else if (p[s1] == true) {
 						sourcedataline.write(wave05, 0, wave05.length);
 					} else {
 						sourcedataline.write(wave08, 0, wave08.length);
