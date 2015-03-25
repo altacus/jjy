@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintStream;
 import java.util.Calendar;
+import java.util.TimeZone;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine.Info;
@@ -566,9 +567,10 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 		int hh = cal.get(Calendar.HOUR_OF_DAY);
 		int mm = cal.get(Calendar.MINUTE);
 		int ss = cal.get(Calendar.SECOND);
+		String tz = cal.getTimeZone().getID();
 
 		gr.clearRect(0, 0, thisSize.width, thisSize.height);
-		gr.drawString(String.format("Time is %02d:%02d:%02d", hh, mm, ss), 20, 20);
+		gr.drawString(String.format("Time is %02d:%02d:%02d %s", hh, mm, ss, tz), 20, 20);
 
 		if (waiting) {
 			gr.drawString("signal starts in " + (60 - ss) + "sec.", 20, 40);
@@ -589,9 +591,10 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 		int hh = cal.get(Calendar.HOUR_OF_DAY);
 		int mm = cal.get(Calendar.MINUTE);
 		int ss = cal.get(Calendar.SECOND);
+		String tz = cal.getTimeZone().getID();
 
 		gr.clearRect(0, 0, thisSize.width, thisSize.height);
-		gr.drawString(String.format("Time is %02d:%02d:%02d", hh, mm, ss), 20, 20);
+		gr.drawString(String.format("Time is %02d:%02d:%02d %s", hh, mm, ss, tz), 20, 20);
 		gr.drawString("Press button to start.", 20, 40);
 
 		repaint();
@@ -609,12 +612,12 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 	}
 
 	public void run() {
-		Calendar cal = Calendar.getInstance();
+		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("JST"));
 		int s0 = cal.get(Calendar.SECOND);
 		boolean waiting = true;
 
 		while (isRunning) {
-			cal = Calendar.getInstance();
+			cal = Calendar.getInstance(TimeZone.getTimeZone("JST"));
 
 			int s1 = cal.get(Calendar.SECOND);
 			if (s1 != s0) {
@@ -641,7 +644,7 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 						sourcedataline.write(wave08, 0, wave08.length);
 					}
 
-					cal = Calendar.getInstance();
+					cal = Calendar.getInstance(TimeZone.getTimeZone("JST"));
 					sleepMS(999 - cal.get(Calendar.MILLISECOND));
 				}
 			}
