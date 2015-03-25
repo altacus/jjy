@@ -612,12 +612,13 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 	}
 
 	public void run() {
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("JST"));
+		TimeZone tzJST = TimeZone.getTimeZone("JST");
+		Calendar cal = Calendar.getInstance(tzJST);
 		int s0 = cal.get(Calendar.SECOND);
 		boolean waiting = true;
 
 		while (isRunning) {
-			cal = Calendar.getInstance(TimeZone.getTimeZone("JST"));
+			cal = Calendar.getInstance(tzJST);
 
 			int s1 = cal.get(Calendar.SECOND);
 			if (s1 != s0) {
@@ -644,7 +645,7 @@ public class JavaJJY extends Applet implements Runnable, ActionListener {
 						sourcedataline.write(wave08, 0, wave08.length);
 					}
 
-					cal = Calendar.getInstance(TimeZone.getTimeZone("JST"));
+					cal = Calendar.getInstance(tzJST);
 					sleepMS(999 - cal.get(Calendar.MILLISECOND));
 				}
 			}
